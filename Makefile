@@ -1,4 +1,4 @@
-# $NetBSD: Makefile,v 1.22 2017/07/31 20:34:17 schmonz Exp $
+# $NetBSD: Makefile,v 1.27 2020/06/25 05:42:37 schmonz Exp $
 #
 
 DISTNAME=		cvm-0.97
@@ -7,7 +7,7 @@ CATEGORIES=		security
 MASTER_SITES=		${HOMEPAGE}
 
 MAINTAINER=		schmonz@NetBSD.org
-HOMEPAGE=		http://untroubled.org/cvm/
+HOMEPAGE=		https://untroubled.org/cvm/
 COMMENT=		Credential Validation Modules
 LICENSE=		gnu-gpl-v2
 
@@ -30,7 +30,7 @@ SUBST_MESSAGE.paths=	Fixing paths.
 SUBST_CLASSES+=		shlibs
 SUBST_STAGE.shlibs=	do-configure
 SUBST_FILES.shlibs=	INSTHIER
-SUBST_SED.shlibs=	-e 's|@CVM_LIB_EXT@|${CVM_LIB_EXT}|g'
+SUBST_VARS.shlibs=	CVM_LIB_EXT
 SUBST_MESSAGE.shlibs=	Fixing shlibs.
 
 RCD_SCRIPTS=		cvm
@@ -47,9 +47,9 @@ DJB_CONFIG_CMDS=							\
 .include "../../mk/bsd.prefs.mk"
 
 .if ${SHLIB_TYPE} == "dylib"
-CVM_LIB_EXT=dylib
+CVM_LIB_EXT=	dylib
 .else
-CVM_LIB_EXT=so
+CVM_LIB_EXT=	so
 .endif
 
 LDFLAGS.SunOS+=	-lsocket -lnsl
